@@ -1,6 +1,5 @@
 from django import forms
 from .models import CampaignInquiry
-
 PLATFORM_CHOICES = [
     ('Instagram', 'Instagram'),
     ('YouTube', 'YouTube'),
@@ -14,6 +13,22 @@ PLATFORM_CHOICES = [
     ('ShareChat', 'ShareChat'),
     ('TikTok', 'TikTok'),
 ]
+
+CREATOR_GENRE_CHOICES = [
+        ('Fashion', 'Fashion'),
+        ('Beauty', 'Beauty'),
+        ('Lifestyle', 'Lifestyle'),
+        ('Food', 'Food'),
+        ('Travel', 'Travel'),
+        ('Fitness', 'Fitness'),
+        ('Gaming', 'Gaming'),
+        ('Technology', 'Technology'),
+        ('Entertainment', 'Entertainment'),
+        ('Education', 'Education'),
+        ('Finance', 'Finance'),
+        ('Health', 'Health'),
+        ('Real Estate', 'Real Estate'),
+    ]
 CREATOR_TYPE_CHOICES = [
     ('Nano', 'Nano'),
     ('Micro', 'Micro'),
@@ -46,6 +61,12 @@ class CampaignInquiryForm(forms.ModelForm):
         widget=forms.Select(attrs={'class': 'form-control'}),
         label="Discover your content creators"
     )
+    creator_genre = forms.MultipleChoiceField(
+        choices= CREATOR_GENRE_CHOICES,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        required=False,
+        label="Select Creator Genre(s)"
+    )
 
     budget_range = forms.ChoiceField(
         choices=BUDGET_CHOICES,
@@ -59,8 +80,10 @@ class CampaignInquiryForm(forms.ModelForm):
             'brand_name',
             'brand_email',
             'brand_contact',
-            'campaign_genre',
-            'sub_genre',
+            # 'campaign_genre',
+            # 'sub_genre',
+            'service',
+            'creator_genre',
             'Timeline',
             'describe_your_campaign',
             'select_influencer_platform',
@@ -73,8 +96,10 @@ class CampaignInquiryForm(forms.ModelForm):
             'brand_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your brand name'}),
             'brand_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
             'brand_contact': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your contact number'}),
-            'campaign_genre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter campaign genre'}),
-            'sub_genre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter sub-genre'}),
+            # 'campaign_genre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter campaign genre'}),
+            # 'sub_genre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter sub-genre'}),
+            'service': forms.Select(attrs={'class': 'form-control'}),
+            #'creator_genre': forms.SelectMultiple(attrs={'class': 'form-control', 'size': '5'}),
             'Timeline': forms.Select(attrs={'class': 'form-control'}),
             'describe_your_campaign': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Describe your Campaign'}),
             'region': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter the region'}),
