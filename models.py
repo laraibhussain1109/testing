@@ -65,12 +65,49 @@ class CampaignInquiry(models.Model):
         ('ShareChat', 'ShareChat'),
         ('TikTok', 'TikTok'),
     ]
+    SERVICE_CHOICES = [
+        ('Influencer Marketing', 'Influencer Marketing'),
+        ('Celebrity Marketing', 'Celebrity Marketing'),
+        ('Visit Store/Place', 'Visit Store/Place'),
+        ('Barter Campaign', 'Brarter Campaign'),
+        ('UGC', 'UGC'),
+        ('Celebrity Endorsement', 'Celebrity Endorsement'),   
+        ('Digital Marketing', 'Digital Marketing'),
+        ('Other', 'Other'),
+    ]
+
+    CREATOR_GENRE_CHOICES = [
+        ('Fashion', 'Fashion'),
+        ('Beauty', 'Beauty'),
+        ('Lifestyle', 'Lifestyle'),
+        ('Food', 'Food'),
+        ('Travel', 'Travel'),
+        ('Fitness', 'Fitness'),
+        ('Gaming', 'Gaming'),
+        ('Technology', 'Technology'),
+        ('Entertainment', 'Entertainment'),
+        ('Education', 'Education'),
+        ('Finance', 'Finance'),
+        ('Health', 'Health'),
+        ('Real Estate', 'Real Estate'),
+    ]
+       
 
     brand_name = models.CharField(max_length=255)
     brand_email = models.EmailField(default=' ')
     brand_contact = models.CharField(max_length=15, default='+91')
-    campaign_genre = models.CharField(max_length=255)
-    sub_genre = models.CharField(max_length=255)
+    # campaign_genre = models.CharField(max_length=255)
+    # sub_genre = models.CharField(max_length=255)
+    service = models.CharField(
+        max_length=50,
+        choices=SERVICE_CHOICES,
+        default='Influencer Marketing'
+    )
+    creator_genre = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="Select any three or more creator genres"
+    )
     describe_your_campaign = models.TextField()
     Timeline = models.CharField(
         max_length=20,
@@ -81,7 +118,7 @@ class CampaignInquiry(models.Model):
 
 
     select_influencer_platform = models.JSONField(
-        default=list,
+        choices=CREATOR_GENRE_CHOICES,
         blank=True,
         help_text="Select one or more platforms"
     )
