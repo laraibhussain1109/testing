@@ -118,7 +118,7 @@ class CampaignInquiry(models.Model):
 
 
     select_influencer_platform = models.JSONField(
-        choices=CREATOR_GENRE_CHOICES,
+        choices=PLATFORM_CHOICES,
         blank=True,
         help_text="Select one or more platforms"
     )
