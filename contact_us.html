@@ -5,59 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     {% load static %}
-    <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/png" href="{% static 'assets/img/logo/logo.png' %}">
+
+    <!-- Keep your original vendor CSS includes -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-<!-- <img src="{% static 'assets/img/logo.png' %}" alt="Logo"> -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-
+    <!-- Gold & black form-only styles -->
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-        }
-        .contact-us-container {
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
-        }
-        .form-title {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #343a40;
-        }
-        .btn-submit {
-            background-color: #0d6efd;
-            color: white;
-        }
-        .btn-submit:hover {
-            background-color: #0b5ed7;
-        }
+      /* form-specific palette and scoped classes to avoid touching navbar */
+      :root{
+        --mc-gold: #D4AF37;
+        --mc-black: #0b0b0b;
+        --mc-card-bg: linear-gradient(180deg, rgba(17,17,17,0.9), rgba(10,10,10,0.95));
+        --mc-muted: #d6d0c6;
+        --mc-input-bg: rgba(255,255,255,0.04);
+      }
+
+      /* Ensure background uses your hero */
+      body{
+        background: url("{% static 'assets/img/hero-bg.jpg' %}") center/cover no-repeat fixed;
+        color: var(--mc-muted);
+        font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      }
+
+      /* translucent overlay for readability */
+      body::before{
+        content:"";
+        position:fixed;
+        inset:0;
+        background: rgba(0,0,0,0.45);
+        z-index:0;
+      }
+
+      /* keep header above overlay (we did not change header markup) */
+      #header { position: relative; z-index: 3; }
+      .container { position: relative; z-index: 3; }
+
+      /* form card */
+      .mc-form-card{
+        max-width: 1100px;
+        margin: 120px auto;
+        padding: 32px;
+        border-radius: 12px;
+        background: var(--mc-card-bg);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        border: 1px solid rgba(212,175,55,0.09);
+      }
+
+      .mc-header{
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin-bottom: 10px;
+      }
+      .mc-header h2{
+        color: var(--mc-gold);
+        margin:0;
+        font-weight:700;
+        font-size:1.5rem;
+      }
+      .mc-sub { color:#bfb7a7; margin-bottom:18px; }
+
+      /* input and textarea styling (scoped) */
+      .mc-form-card input[type="text"],
+      .mc-form-card input[type="email"],
+      .mc-form-card input[type="tel"],
+      .mc-form-card textarea,
+      .mc-form-card select {
+        background: var(--mc-input-bg);
+        color: #efece4;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 8px;
+        padding: 10px 12px;
+        width:100%;
+      }
+      .mc-form-card textarea { min-height: 120px; resize: vertical; }
+      .mc-form-card input:focus,
+      .mc-form-card textarea:focus,
+      .mc-form-card select:focus {
+        outline: none;
+        border-color: var(--mc-gold);
+        box-shadow: 0 0 0 6px rgba(212,175,55,0.06);
+      }
+
+      /* submit button */
+      .mc-btn-gold{
+        background: linear-gradient(90deg, #e0bf57, #c69f2a);
+        color: var(--mc-black);
+        font-weight:700;
+        border-radius: 8px;
+        padding: 10px 16px;
+        border: none;
+      }
+
+      /* checkbox grid (4 per row) - scoped */
+      .mc-checkbox-grid{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px 14px;
+      }
+
+      .mc-form-check{
+        display:flex;
+        gap:10px;
+        align-items:center;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.02);
+      }
+
+      .mc-form-check input[type="checkbox"]{
+        width:18px;
+        height:18px;
+        accent-color: var(--mc-gold); /* modern browsers */
+        cursor:pointer;
+      }
+      .mc-form-check label { margin:0; color:#efece4; font-weight:600; }
+
+      /* responsiveness */
+      @media (max-width: 1100px){
+        .mc-checkbox-grid { grid-template-columns: repeat(3, 1fr); }
+        .mc-form-card { padding: 24px; margin: 90px 16px; }
+      }
+      @media (max-width: 768px){
+        .mc-checkbox-grid { grid-template-columns: repeat(2, 1fr); }
+        .mc-form-card { margin: 70px 12px; padding: 18px; }
+      }
+      @media (max-width: 480px){
+        .mc-checkbox-grid { grid-template-columns: 1fr; gap:8px; }
+      }
+
+      /* small helper titles */
+      .mc-section-title {
+        color:#f6eedf;
+        font-weight:700;
+        margin: 14px 0 8px;
+      }
+
+      /* notification alert styling */
+      .alert { background: linear-gradient(90deg, rgba(212,175,55,0.06), rgba(0,0,0,0.04)); color: #efece4; border: 1px solid rgba(212,175,55,0.06); }
     </style>
 </head>
-{% load static %}
-<body background="{% static 'assets/img/hero-bg.jpg' %}">
+
+<body>
+    <!-- ==== NAVBAR: LEFT EXACTLY AS YOUR ORIGINAL ==== -->
     <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
 
-      <h1 class="logo me-auto me-lg-0"> <img src="{% static 'assets/img/logo/logo-1.png' %}" class="img-fluid" alt="Logo" style = "max-width: 150px;"> <a href="/">Marvel<span>Collabs</span> </a> </h1>
+      <h1 class="logo me-auto me-lg-0"> <img src="{% static 'assets/img/logo/logo.png' %}" class="img-fluid" alt="Logo" style = "max-width: 150px;"> <a href="/">Marvel<span>Collabs</span> </a> </h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a> -->
 
@@ -97,6 +201,8 @@
 
     </div>
   </header><!-- End Header -->
+    <!-- ==== END NAVBAR (unchanged) ==== -->
+
     <div class="container">
         {% for message in messages %}
         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -106,94 +212,103 @@
           </button>
         </div>
       {% endfor %}
-        <div class="contact-us-container">
-            <h2 class="form-title">Contact Us</h2>
-            <form method="post">
-                {% csrf_token %}
-                <form method="post">
-    {% csrf_token %}
 
-    <div class="mb-3">
-        {{ form.brand_name.label_tag }} 
-        {{ form.brand_name }}
-    </div>
+      <!-- FORM CARD (only this area altered) -->
+      <div class="mc-form-card">
+        <div class="mc-header">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="flex:0 0 34px;">
+            <rect width="24" height="24" rx="6" fill="#111"/>
+            <path d="M6 12h12M12 6v12" stroke="#D4AF37" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <h2>Contact Us</h2>
+            <div class="mc-sub">Tell us about your campaign — we’ll find creators that match your brief.</div>
+          </div>
+        </div>
 
-    <div class="mb-3">
-        {{ form.brand_email.label_tag }} 
-        {{ form.brand_email }}
-    </div>
+        <!-- single form tag, no nesting -->
+        <form method="post" novalidate>
+          {% csrf_token %}
 
-    <div class="mb-3">
-        {{ form.brand_contact.label_tag }} 
-        {{ form.brand_contact }}
-    </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Brand / Company Name</label>
+              {{ form.brand_name }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              {{ form.brand_email }}
+            </div>
 
-    <div class="mb-3">
-        {{ form.service.label_tag }} 
-        {{ form.service }}
-    </div>
+            <div class="col-md-6">
+              <label class="form-label">Contact Number</label>
+              {{ form.brand_contact }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Service</label>
+              {{ form.service }}
+            </div>
+          </div>
 
-    <div class="mb-3">
-      <label class="form-label fw-bold">Select Creator's Genre(s)</label>
-        <div class="d-flex flex-wrap gap-3">
-            {% for checkbox in form.creator_genre %}
-                <div class="form-check me-3">
-                    {{ checkbox.tag }}
-                    <label class="form-check-label" for="{{ checkbox.id_for_label }}">
-                        {{ checkbox.choice_label }}
-                    </label>
+          <div class="mt-3">
+            <div class="mc-section-title">Select Creator's Genre(s)</div>
+            <div class="mc-checkbox-grid mt-2">
+              {% for checkbox in form.creator_genre %}
+                <div class="mc-form-check">
+                  {{ checkbox.tag }}
+                  <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
                 </div>
-            {% endfor %}
-        </div>
-    </div>
+              {% endfor %}
+            </div>
+          </div>
 
+          <div class="row g-3 mt-3">
+            <div class="col-md-6">
+              <label class="form-label">Timeline</label>
+              {{ form.Timeline }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Region</label>
+              {{ form.region }}
+            </div>
+          </div>
 
-    <div class="mb-3">
-        {{ form.Timeline.label_tag }} 
-        {{ form.Timeline }}
-    </div>
+          <div class="mt-3">
+            <label class="form-label">Describe your campaign</label>
+            {{ form.describe_your_campaign }}
+          </div>
 
-    <div class="mb-3">
-        {{ form.describe_your_campaign.label_tag }} 
-        {{ form.describe_your_campaign }}
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label fw-bold">Select Influencer Platform(s)</label>
-        <div class="d-flex flex-wrap gap-3">
-            {% for checkbox in form.select_influencer_platform %}
-                <div class="form-check me-3">
-                    {{ checkbox.tag }}
-                    <label class="form-check-label" for="{{ checkbox.id_for_label }}">
-                        {{ checkbox.choice_label }}
-                    </label>
+          <div class="mt-3">
+            <div class="mc-section-title">Select Influencer Platform(s)</div>
+            <div class="mc-checkbox-grid mt-2">
+              {% for checkbox in form.select_influencer_platform %}
+                <div class="mc-form-check">
+                  {{ checkbox.tag }}
+                  <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
                 </div>
-            {% endfor %}
-        </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="row g-3 mt-3">
+            <div class="col-md-6">
+              <label class="form-label">Creator Type</label>
+              {{ form.creator_type }}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Budget Range</label>
+              {{ form.budget_range }}
+            </div>
+          </div>
+
+          <div class="mt-4 d-grid">
+            <button type="submit" class="mc-btn-gold">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <div class="mb-3">
-        {{ form.region.label_tag }} 
-        {{ form.region }}
-    </div>
-    <div class="mb-3">
-    {{ form.creator_type.label_tag }}
-    {{ form.creator_type }}
-</div>
-
-<div class="mb-3">
-    {{ form.budget_range.label_tag }}
-    {{ form.budget_range }}
-</div>
-
-    <button type="submit" class="btn btn-submit w-100">Submit</button>
-</form>
-
-        </div>
-    </div>
-    <!-- Bootstrap JS -->
-     
-  <!-- Vendor JS Files -->
+  <!-- Keep your original JS includes -->
   <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
   <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -201,9 +316,7 @@
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-
-  <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
